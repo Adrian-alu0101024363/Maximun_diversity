@@ -1,6 +1,7 @@
 #ifndef ALGORITMO
 #define ALGORITMO
 #include "Solution.h"
+#include <chrono>
 
 class Maxdiversity;
 

@@ -9,7 +9,7 @@ vector<double> Solution::centroid() {
   }
   for (int l = 0; l < sol.size(); l++) {
     sol[l] = sol[l] / points_.size();
-    sol[l] = ceil(sol[l] * 100) / 100.0;
+    //sol[l] = ceil(sol[l] * 100) / 100.0;
   }
   return sol;
 }
@@ -43,4 +43,22 @@ void Solution::print() {
     }
     cout << endl;
   }
+}
+double Solution::distancia(vector<double> d1, vector<double> d2) {
+  double sum = 0.0;
+  for (int j = 0; j < d1.size(); j++) {
+    sum += pow(d2[j] - d1[j],2);
+  }
+  double root = sqrt(sum);
+  return root;
+}
+
+double Solution::distanceTotal() {
+  double sum = 0.0;
+  for (int i = 0; i < points_.size() - 1; i++) {
+    for (int j = i + 1; j < points_.size(); j++) {
+      sum += distancia(points_[i], points_[j]);
+    }
+  }
+  return sum;
 }
