@@ -1,6 +1,6 @@
 #ifndef MAXDIVERSITY
 #define MAXDIVERSITY
-
+#include "Algoritmo.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -16,12 +16,16 @@ class Maxdiversity {
   vector<vector<double>> points_;
   int numberElements_;
   int dimension_;
+  Algoritmo* method_;
  public:
-  Maxdiversity(string file);
+  Maxdiversity(string file, Algoritmo* method);
   ~Maxdiversity(){}
   void read(string file);
   vector<double> values(string line);
   void print();
+  vector<vector<double>> getPointsCopy() {return points_;}
+  int getDimension() {return dimension_;}
+  Solution solve(Maxdiversity max, int m){return method_->solve(*this, m);}
 };
 
 

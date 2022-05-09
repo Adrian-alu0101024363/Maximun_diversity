@@ -1,4 +1,5 @@
 #include "headers/maxdiversity.h"
+#include "headers/Grasp.h"
 
 
 int main(int argc, char** argv) {
@@ -6,8 +7,17 @@ int main(int argc, char** argv) {
     cout << "Please specify the path to file" << endl;
   } else {
     string path = argv[1];
-    cout << path;
-    Maxdiversity max(path);
+    cout << path << endl;
+    Maxdiversity max(path, new Grasp());
     max.print();
+    Solution s = max.solve(max,2);
+    cout << "Solution elements: " << endl;
+    s.print();
+    /*
+    auto to = max.getPointsCopy();
+    Solution sol(to);
+    auto v = sol.centroid(2);
+    for (auto element : v) cout << element << ",";
+    */
   }
 }

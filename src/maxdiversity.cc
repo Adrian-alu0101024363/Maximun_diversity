@@ -1,7 +1,8 @@
 #include "../headers/maxdiversity.h"
 
-Maxdiversity::Maxdiversity(string file) {
+Maxdiversity::Maxdiversity(string file, Algoritmo* method) {
   read(file);
+  method_ = method;
 }
 
 bool BothAreSpaces(char lhs, char rhs) { return (lhs == rhs) && (lhs == ' ');}
@@ -17,7 +18,6 @@ void Maxdiversity::read(string file) {
   getline(f,line);
   while(getline(f, line)) {
     string str = line;
-    cout << endl << line;
     std::replace(std::begin(str),std::end(str),'\t',' ');
     std::replace(std::begin(str),std::end(str),',','.');
     std::string::iterator new_end = std::unique(str.begin(), str.end(), BothAreSpaces);
@@ -52,7 +52,6 @@ std::vector<double> Maxdiversity::values(std::string line) {
 void Maxdiversity::print() {
   cout << "Number of elements: " << numberElements_ << endl;
   cout << "Dimension of each: " << dimension_ << endl;
-
   for (int i = 0; i < points_.size(); i++) {
     for (int j = 0; j < points_[i].size(); j++) {
       cout << points_[i][j] << " , ";
