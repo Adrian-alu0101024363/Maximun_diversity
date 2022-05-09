@@ -1,7 +1,7 @@
 #include "../headers/Solution.h"
 
-vector<double> Solution::centroid(int k) {
-  vector<double> sol(k);
+vector<double> Solution::centroid() {
+  vector<double> sol(k_);
   for (int i = 0; i < points_.size(); i++) {
     for (int j = 0; j < points_[i].size(); j++) {
       sol[j] += points_[i][j];
@@ -14,9 +14,9 @@ vector<double> Solution::centroid(int k) {
   return sol;
 }
 
-vector<double> Solution::getFarElement(vector<double> sc, int k) {
+vector<double> Solution::getFarElementRemoving(vector<double> sc) {
   double max(-std::numeric_limits<double>::infinity());
-  vector<double> sol(k);
+  vector<double> sol(k_);
   vector<double> element;
   size_t pos;
   for (int i = 0; i < points_.size(); i++) {

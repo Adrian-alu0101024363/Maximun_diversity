@@ -1,14 +1,15 @@
 #include "../headers/Grasp.h"
 
 Solution Grasp::solve(Maxdiversity max, int m) {
-  Solution initial(max.getPointsCopy());
+  Solution initial(max.getPointsCopy(), max.getDimension());
   Solution finalSolution;
-  auto sc = initial.centroid(max.getDimension());
+  finalSolution.setK(max.getDimension());
+  auto sc = initial.centroid();
   int i = 0; 
   while (i <= m) {
-    auto se = initial.getFarElement(sc, max.getDimension());
+    auto se = initial.getFarElementRemoving(sc);
     finalSolution.add(se);
-    sc = finalSolution.centroid(max.getDimension());
+    sc = finalSolution.centroid();
     i++;
   }
   return finalSolution;
