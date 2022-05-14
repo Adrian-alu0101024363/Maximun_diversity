@@ -44,6 +44,12 @@
     "xutility": "cpp",
     "sstream": "cpp",
     "algorithm": "cpp",
-    "ratio": "cpp"
+    "ratio": "cpp",
+    "chrono": "cpp",
+    "ctime": "cpp",
+    "iomanip": "cpp",
+    "random": "cpp",
+    "xlocmon": "cpp",
+    "xloctime": "cpp"
   }
 }

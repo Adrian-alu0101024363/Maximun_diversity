@@ -25,7 +25,8 @@ class Maxdiversity {
   void print();
   vector<vector<double>> getPointsCopy() {return points_;}
   int getDimension() {return dimension_;}
-  Solution solve(Maxdiversity max, int m){return method_->solve(*this, m);}
+  int getSize() {return numberElements_;}
+  Solution solve(Maxdiversity max, int m, int rlc){return method_->solve(*this, m, rlc);}
 };
 
 
