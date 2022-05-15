@@ -4,7 +4,7 @@ Solution Grasp::solve(Maxdiversity max, int m, int rlc) {
   auto t_start = std::chrono::high_resolution_clock::now();
   Solution finalSolution = ConstructGrasp(max, m, rlc);
   int i = 0;
-  while (i < 10) {
+  while (i < 20) {
     Solution noLocal = ConstructGrasp(max, m, rlc);
     Solution sol = localSearch(max,noLocal);
     //cout << "Sol no local: " << noLocal.distanceTotal() << endl;
