@@ -2,16 +2,22 @@
 
 Solution Grasp::solve(Maxdiversity max, int m, int rlc) {
   auto t_start = std::chrono::high_resolution_clock::now();
-  Solution noLocal = ConstructGrasp(max, m, rlc);
-  Solution sol = localSearch(max,noLocal);
-  //cout << "Sol no local: " << noLocal.distanceTotal() << endl;
+  Solution finalSolution = ConstructGrasp(max, m, rlc);
+  int i = 0;
+  while (i < 10) {
+    Solution noLocal = ConstructGrasp(max, m, rlc);
+    Solution sol = localSearch(max,noLocal);
+    //cout << "Sol no local: " << noLocal.distanceTotal() << endl;
+    if (sol.distanceTotal() > finalSolution.distanceTotal()) {
+      finalSolution = sol;
+    }
+    i++;
+  }
   auto t_end = std::chrono::high_resolution_clock::now();
   auto timeCost = std::chrono::duration<double, std::milli>(t_end-t_start).count();
-  noLocal.setTimeCost(timeCost);
   //noLocal.print();
-  sol.setTimeCost(timeCost);
-  return sol;
-  //return noLocal;
+  finalSolution.setTimeCost(timeCost);
+  return finalSolution;
 }
 
 Solution Grasp::ConstructGrasp(Maxdiversity max, int m, int rlc) {
