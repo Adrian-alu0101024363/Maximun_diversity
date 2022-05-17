@@ -81,10 +81,20 @@ double Solution::distancia(vector<double> d1, vector<double> d2) {
   return root;
 }
 
+/*
 double Solution::distanceTotal() {
   double sum = 0.0;
   for (int i = 0; i < points_.size() - 1; i++) {
     sum += distancia(points_[i], points_[i+1]);
+  }
+  return sum;
+}*/
+double Solution::distanceTotal() {
+  double sum = 0.0;
+  for (int i = 0; i < points_.size() - 1; i++) {
+    for(int j = i + 1; j < points_.size();j++) {
+    sum += distancia(points_[i], points_[j]);
+    }
   }
   return sum;
 }
