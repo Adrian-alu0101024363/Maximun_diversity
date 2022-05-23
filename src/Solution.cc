@@ -1,5 +1,10 @@
 #include "../headers/Solution.h"
 
+/**
+ * @brief calculate the centroid of the solution
+ * 
+ * @return vector<double> 
+ */
 vector<double> Solution::centroid() {
   vector<double> sol(k_);
   for (int i = 0; i < points_.size(); i++) {
@@ -14,6 +19,12 @@ vector<double> Solution::centroid() {
   return sol;
 }
 
+/**
+ * @brief Get the farest vector and remove it from the solution
+ * 
+ * @param sc reference vector to get the farest
+ * @return vector<double> 
+ */
 vector<double> Solution::getFarElementRemoving(vector<double> sc) {
   double max(-std::numeric_limits<double>::infinity());
   vector<double> sol(k_);
@@ -36,6 +47,12 @@ vector<double> Solution::getFarElementRemoving(vector<double> sc) {
   return element;
 }
 
+/**
+ * @brief Get the farest vector(copy) from the solution
+ * 
+ * @param sc reference vector to get the farest
+ * @return vector<double> 
+ */
 vector<double> Solution::getFarElement(vector<double> sc) {
   double max(-std::numeric_limits<double>::infinity());
   vector<double> sol(k_);
@@ -57,6 +74,11 @@ vector<double> Solution::getFarElement(vector<double> sc) {
   return element;
 }
 
+/**
+ * @brief remove a given vector from the solution
+ * 
+ * @param element vector to be removed
+ */
 void Solution::remove(vector<double> element) {
   if (std::find(points_.begin(), points_.end(), element) != points_.end()) {
     auto pos = std::find(points_.begin(), points_.end(), element);
@@ -64,6 +86,10 @@ void Solution::remove(vector<double> element) {
   }
 }
 
+/**
+ * @brief print the solution elements aka vectors to console
+ * 
+ */
 void Solution::print() {
     for (int i = 0; i < points_.size(); i++) {
     for (int j = 0; j < points_[i].size(); j++) {
@@ -72,6 +98,14 @@ void Solution::print() {
     cout << endl;
   }
 }
+
+/**
+ * @brief return the distance between two vectors given
+ * 
+ * @param d1 vector to measure distance
+ * @param d2 vector to measure distance
+ * @return double 
+ */
 double Solution::distancia(vector<double> d1, vector<double> d2) {
   double sum = 0.0;
   for (int j = 0; j < d1.size(); j++) {
@@ -89,6 +123,12 @@ double Solution::distanceTotal() {
   }
   return sum;
 }*/
+
+/**
+ * @brief return the z value of this solution
+ * 
+ * @return double 
+ */
 double Solution::distanceTotal() {
   double sum = 0.0;
   for (int i = 0; i < points_.size() - 1; i++) {
@@ -98,3 +138,49 @@ double Solution::distanceTotal() {
   }
   return sum;
 }
+
+/**
+ * @brief min distance to element given in solution
+ * 
+ * @param element vector to measure distance
+ * @return double 
+ */
+double Solution::minDistance(vector<double> element) {
+  if (size() == 0) {
+    return INT32_MIN;
+  }
+  double distanceM = INT32_MAX;
+  for (int i = 0; i < getElementsCopy().size(); i++) {
+    if ((distancia(at(i), element)) < distanceM) {
+      distanceM = distancia(at(i), element);
+    }
+  }
+  return distanceM;
+}
+
+/**
+ * @brief max distance to element given in solution
+ * 
+ * @param element vector to measure distance
+ * @return double distance
+ */
+double Solution::maxDistance(vector<double> element) {
+  if (size() == 0) {
+    return INT32_MAX;
+  }
+  double distanceM = INT32_MIN;
+  for (int i = 0; i < getElementsCopy().size(); i++) {
+    if ((distancia(at(i), element)) > distanceM) {
+      distanceM = distancia(at(i), element);
+    }
+  }
+  return distanceM;
+}
+
+ /*
+ double Solution::upperBound(int m, Maxdiversity all) {
+   auto greedy = new Greedy();
+   Solution s = greedy->solve(all,m,0);
+   return s.distanceTotal();
+ }
+ */

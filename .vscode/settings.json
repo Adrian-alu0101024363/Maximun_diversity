@@ -50,6 +50,11 @@
     "iomanip": "cpp",
     "random": "cpp",
     "xlocmon": "cpp",
-    "xloctime": "cpp"
+    "xloctime": "cpp",
+    "filesystem": "cpp",
+    "list": "cpp",
+    "locale": "cpp",
+    "xlocbuf": "cpp",
+    "xlocmes": "cpp"
   }
 }

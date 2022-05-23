@@ -1,12 +1,31 @@
 #include "../headers/maxdiversity.h"
 
+/**
+ * @brief Construct a new Maxdiversity:: Maxdiversity object
+ * 
+ * @param file file to construct from
+ * @param method approach to use to solve the problem
+ */
 Maxdiversity::Maxdiversity(string file, Algoritmo* method) {
   read(file);
   method_ = method;
 }
 
+/**
+ * @brief check if there are two spaces together
+ * use to parse the file
+ * @param lhs 
+ * @param rhs 
+ * @return true 
+ * @return false 
+ */
 bool BothAreSpaces(char lhs, char rhs) { return (lhs == rhs) && (lhs == ' ');}
 
+/**
+ * @brief read a maxdiversity problem from a given file
+ * 
+ * @param file the file to read from
+ */
 void Maxdiversity::read(string file) {
   ifstream f;
   f.open(file);
@@ -47,8 +66,10 @@ std::vector<double> Maxdiversity::values(std::string line) {
   return val;
 }
 
-
-
+/**
+ * @brief print the maxdiversity problem to console
+ * dimension, size and vectors
+ */
 void Maxdiversity::print() {
   cout << "Number of elements: " << numberElements_ << endl;
   cout << "Dimension of each: " << dimension_ << endl;
@@ -58,4 +79,11 @@ void Maxdiversity::print() {
     }
     cout << endl;
   }
+}
+
+double Maxdiversity::upperBound(int m) {
+  Maxdiversity d = *this;
+  auto greedy = new Greedy();
+  Solution s = greedy->solve(d,m,0);
+  return s.distanceTotal();
 }

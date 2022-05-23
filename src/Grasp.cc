@@ -1,5 +1,13 @@
 #include "../headers/Grasp.h"
 
+/**
+ * @brief solve the max problem using grasp
+ * 
+ * @param max the problem
+ * @param m the max size of solution
+ * @param rlc the elements to get as farest
+ * @return Solution 
+ */
 Solution Grasp::solve(Maxdiversity max, int m, int rlc) {
   auto t_start = std::chrono::high_resolution_clock::now();
   Solution finalSolution = ConstructGrasp(max, m, rlc);
@@ -20,6 +28,14 @@ Solution Grasp::solve(Maxdiversity max, int m, int rlc) {
   return finalSolution;
 }
 
+/**
+ * @brief the constructive phase of the grasp algorithm
+ * 
+ * @param max the problem
+ * @param m the max size of solution
+ * @param rlc the elements to get as farest
+ * @return Solution 
+ */
 Solution Grasp::ConstructGrasp(Maxdiversity max, int m, int rlc) {
   Solution initial(max.getPointsCopy(), max.getDimension());
   Solution finalSolution;
@@ -43,6 +59,13 @@ Solution Grasp::ConstructGrasp(Maxdiversity max, int m, int rlc) {
   return finalSolution;
 }
 
+/**
+ * @brief from a given solution remove and insert elements until
+ * reaching a local best
+ * @param max the problem data
+ * @param origin the solution from which we search 
+ * @return Solution 
+ */
 Solution Grasp::localSearch(Maxdiversity max, Solution origin) {
   double originalDistance = origin.distanceTotal();
   auto elements = origin.getElements();

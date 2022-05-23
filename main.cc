@@ -1,6 +1,7 @@
 #include "headers/maxdiversity.h"
 #include "headers/Grasp.h"
 #include "headers/Greedy.h"
+#include "headers/Branch.h"
 #include <iomanip>
 #include <time.h>
 #include <filesystem>
@@ -9,6 +10,12 @@ using std::setw;
 using std::time;
 namespace fs = std::filesystem;
 
+/**
+ * @brief Get the Files object from path
+ * 
+ * @param path path to files
+ * @return vector<string> vector of files
+ */
 vector<string> getFiles(string path = "./files/") {
   vector<string> files;
   for (const auto & entry : fs::directory_iterator(path)) {
@@ -19,6 +26,11 @@ vector<string> getFiles(string path = "./files/") {
   return files;
 }
 
+/**
+ * @brief solve problem from file using grasp
+ * 
+ * @param file 
+ */
 void grasp(string file) {
   int m = 2;
   int j = 1;
@@ -40,11 +52,36 @@ void grasp(string file) {
   }
 }
 
+/**
+ * @brief solve problem from file using greedy
+ * 
+ * @param file 
+ */
 void greedy(string file) {
 
   int m = 2;
   while (m < 6) {
     Maxdiversity max(file, new Grasp());
+    Solution s = max.solve(max,m,1);
+    string name = file.substr(8,file.length());
+    cout << name << setw(4) << max.getSize() << setw(4);
+    cout << max.getDimension() << setw(4) << m << setw(12);
+    cout << s.distanceTotal() << setw(8) << s.getTimeCost() << endl;
+    //cout << "S: ";
+    //s.print();
+    m++;
+  }
+}
+
+/**
+ * @brief solve problem from file using branch
+ * 
+ * @param file 
+ */
+void branch(string file) {
+  int m = 2;
+  while (m < 6) {
+    Maxdiversity max(file, new Branch());
     Solution s = max.solve(max,m,1);
     string name = file.substr(8,file.length());
     cout << name << setw(4) << max.getSize() << setw(4);
@@ -79,6 +116,14 @@ int main(int argc, char** argv) {
     for (int i = 0; i < files.size(); i++) {
       file = files[i];
       grasp(file);
+      cout << endl;
+    }
+    //Branch
+    cout << "Problema Branch" << setw(12) << "n" << setw(4) << "K" << setw(4) << "m";
+    cout << setw(10) << "z" << setw(9) << "CPU" << endl;
+    for (int i = 0; i < files.size(); i++) {
+      file = files[i];
+      branch(file);
       cout << endl;
     }
 
